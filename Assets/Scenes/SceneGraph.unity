@@ -339,7 +339,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   earthMaterial: {fileID: 2100000, guid: af468ffd7d4f34a4e96c278eb868e5ab, type: 2}
-  useSceneGraph: 0
+  useSceneGraph: 1
 --- !u!4 &1102248523
 Transform:
   m_ObjectHideFlags: 0
