@@ -34,8 +34,11 @@ public class SolarSystemSceneGraph
         SceneGraphNode earthNode = BuildPlanet (new MyVector(5, 0 , 0), Color.blue, 0.25f, earthMaterial);
         rootScaleNode.AddChild(earthNode);
 
-        SceneGraphNode moonNode = BuildPlanet(new MyVector(5.2f, 0, 0), Color.gray, 0.025f);
+        SceneGraphNode moonNode = BuildPlanet(new MyVector(5.6f, 0, 0), Color.gray, 0.025f);
         rootScaleNode.AddChild(moonNode);
+
+        SceneGraphNode satelliteNode = BuildSatellite(new MyVector(5.2f, 0, 0), 0.01f);
+        rootScaleNode.AddChild(satelliteNode);
 
         RootNode.Draw(MyMatrix.CreateIdentity());
     }
@@ -54,6 +57,32 @@ public class SolarSystemSceneGraph
             planet.GetComponent<Renderer>().material = material;
         }
         return new SceneGraphNode("name", comboTransform, planet);
+    }
+
+    private SceneGraphNode BuildSatellite(MyVector pOffset, float scale)
+    {
+        MyMatrix localTransform = MyMatrix.CreateTranslation(pOffset);
+        MyMatrix scaleTransform = MyMatrix.CreateScale(new MyVector(scale, scale, scale));
+        MyMatrix rotationTransform = MyMatrix.CreateRotationZ(Mathf.PI / 8);
+        MyMatrix comboTransform = localTransform.Multiply(rotationTransform);
+        comboTransform = comboTransform.Multiply(scaleTransform);
+
+        SceneGraphNode satelliteNode = new SceneGraphNode("satellite", comboTransform);
+
+        GameObject body1 = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        SceneGraphNode body1Node = new SceneGraphNode("satellite1", 
+            localTransform.Multiply(MyMatrix.CreateScale(new MyVector(4f, 2f, 1f))), 
+            body1);
+
+        GameObject body2 = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        SceneGraphNode body2Node = new SceneGraphNode("satellite2",
+            localTransform.Multiply(MyMatrix.CreateScale(new MyVector(1f, 1f, 5f))),
+            body2);
+
+        satelliteNode.AddChild(body1Node);
+        satelliteNode.AddChild(body2Node);
+
+        return satelliteNode;
     }
 }
 
