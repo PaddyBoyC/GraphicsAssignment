@@ -5,13 +5,21 @@ using UnityEngine;
 public class GenerateSolarSystem : MonoBehaviour
 {
     SolarSystem solarSystem;
+    SolarSystemSceneGraph solarSystemSceneGraph;
 
     public Material earthMaterial;
+    public bool useSceneGraph;
 
     void Start()
     {
-        solarSystem = new SolarSystem(new MyVector(0, 0, 0), new MyVector(0, 0, 0), new MyVector(1, 1, 1), earthMaterial);
-
+        if (useSceneGraph)
+        {
+            solarSystemSceneGraph = new SolarSystemSceneGraph(new MyVector(0, 0, 0), new MyVector(0, 0, 0), new MyVector(1, 1, 1), earthMaterial);
+        }
+        else
+        {
+            solarSystem = new SolarSystem(new MyVector(0, 0, 0), new MyVector(0, 0, 0), new MyVector(1, 1, 1), earthMaterial);
+        }
     }
 
     void Update()
