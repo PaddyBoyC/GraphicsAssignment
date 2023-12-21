@@ -11,7 +11,7 @@ namespace Assets.Scripts
     {
         public string Name { get; private set; }
 
-        public MyMatrix Transform { get; private set; }
+        public MyMatrix Transform { get; set; }
 
         public GameObject gameObject { get; private set; }
 

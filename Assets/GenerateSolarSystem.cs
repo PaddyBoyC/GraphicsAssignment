@@ -24,6 +24,9 @@ public class GenerateSolarSystem : MonoBehaviour
 
     void Update()
     {
-        
+        if (useSceneGraph)
+        {
+            solarSystemSceneGraph.Update();
+        }
     }
 }
