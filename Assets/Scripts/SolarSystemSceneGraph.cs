@@ -11,7 +11,7 @@ public class SolarSystemSceneGraph
 
     public SceneGraphNode RootNode { get; private set; }
 
-    List<Planet> planets = new List<Planet>();
+    List<GravityBody> bodies = new List<GravityBody>();
 
     public SolarSystemSceneGraph(MyVector pPosition, MyVector pRotation, MyVector pScale, Material earthMaterial)
     {
@@ -34,55 +34,30 @@ public class SolarSystemSceneGraph
 
         Planet sun = new Planet(new MyVector(0, 0, 0), oneVector, new MyVector(0, 0, 0), 1000, Color.yellow);;
         rootScaleNode.AddChild(sun.RootNode);
-        planets.Add(sun);
+        bodies.Add(sun);
 
         Planet earth = new Planet(new MyVector(5, 0, 0), oneVector.Multiply(0.25f), new MyVector(0, 0, 3), 1, Color.blue, earthMaterial);
         rootScaleNode.AddChild(earth.RootNode);
-        planets.Add(earth);
+        bodies.Add(earth);
 
         Planet moon = new Planet(new MyVector(5.6f, 0, 0), oneVector.Multiply(0.25f), new MyVector(0, 0, 3), 0.01f, Color.gray);
         rootScaleNode.AddChild(moon.RootNode);
-        planets.Add(moon);
+        bodies.Add(moon);
 
-        //SceneGraphNode satelliteNode = BuildSatellite(new MyVector(5.2f, 0, 0), 0.01f);
-        //rootScaleNode.AddChild(satelliteNode);
+        Satellite satellite = new Satellite(new MyVector(5, 0, 3), oneVector.Multiply(0.1f), new MyVector(1, 1, 1), 0.01f, Color.gray);
+        rootScaleNode.AddChild(satellite.RootNode);
+        bodies.Add(satellite);
 
         RootNode.Draw(MyMatrix.CreateIdentity());
     }
     
     public void Update()
     {
-        foreach (var planet in planets)
+        foreach (var body in bodies)
         {
-            planet.Update(planets);
+            body.Update(bodies);
         }
         RootNode.Draw(MyMatrix.CreateIdentity());
-    }
-
-    private SceneGraphNode BuildSatellite(MyVector pOffset, float scale)
-    {
-        MyMatrix localTransform = MyMatrix.CreateTranslation(pOffset);
-        MyMatrix scaleTransform = MyMatrix.CreateScale(new MyVector(scale, scale, scale));
-        MyMatrix rotationTransform = MyMatrix.CreateRotationZ(Mathf.PI / 8);
-        MyMatrix comboTransform = localTransform.Multiply(rotationTransform);
-        comboTransform = comboTransform.Multiply(scaleTransform);
-
-        SceneGraphNode satelliteNode = new SceneGraphNode("satellite", comboTransform);
-
-        GameObject body1 = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        SceneGraphNode body1Node = new SceneGraphNode("satellite1", 
-            localTransform.Multiply(MyMatrix.CreateScale(new MyVector(4f, 2f, 1f))), 
-            body1);
-
-        GameObject body2 = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        SceneGraphNode body2Node = new SceneGraphNode("satellite2",
-            localTransform.Multiply(MyMatrix.CreateScale(new MyVector(1f, 1f, 5f))),
-            body2);
-
-        satelliteNode.AddChild(body1Node);
-        satelliteNode.AddChild(body2Node);
-
-        return satelliteNode;
     }
 }
 
