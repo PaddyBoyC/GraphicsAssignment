@@ -32,16 +32,17 @@ public class SolarSystemSceneGraph
 
         MyVector oneVector = new MyVector(1, 1, 1);
 
-        Planet sun = new Planet(new MyVector(0, 0, 0), oneVector, Color.yellow);
+        Planet sun = new Planet(new MyVector(0, 0, 0), oneVector, new MyVector(0, 0, 0), 1000, Color.yellow);;
         rootScaleNode.AddChild(sun.RootNode);
         planets.Add(sun);
 
-        Planet earth = new Planet(new MyVector(5, 0, 0), oneVector.Multiply(0.25f), Color.blue, earthMaterial);
+        Planet earth = new Planet(new MyVector(5, 0, 0), oneVector.Multiply(0.25f), new MyVector(0, 0, 3), 1, Color.blue, earthMaterial);
         rootScaleNode.AddChild(earth.RootNode);
         planets.Add(earth);
 
-        //SceneGraphNode moonNode = BuildPlanet(new MyVector(5.6f, 0, 0), Color.gray, 0.025f);
-        //rootScaleNode.AddChild(moonNode);
+        Planet moon = new Planet(new MyVector(5.6f, 0, 0), oneVector.Multiply(0.25f), new MyVector(0, 0, 3), 0.01f, Color.gray);
+        rootScaleNode.AddChild(moon.RootNode);
+        planets.Add(moon);
 
         //SceneGraphNode satelliteNode = BuildSatellite(new MyVector(5.2f, 0, 0), 0.01f);
         //rootScaleNode.AddChild(satelliteNode);
@@ -51,8 +52,10 @@ public class SolarSystemSceneGraph
     
     public void Update()
     {
-        var earth = planets[1];
-        earth.Update();
+        foreach (var planet in planets)
+        {
+            planet.Update(planets);
+        }
         RootNode.Draw(MyMatrix.CreateIdentity());
     }
 

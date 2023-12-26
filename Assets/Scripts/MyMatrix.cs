@@ -190,7 +190,6 @@ public class MyMatrix
         SetPosition(obj.transform);
         SetRotation(obj.transform);
         SetScale(obj.transform);
-
     }
 
     public override string ToString()
