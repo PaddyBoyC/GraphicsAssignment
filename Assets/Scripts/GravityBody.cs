@@ -27,10 +27,17 @@ namespace Assets.Scripts
                     const float G = 0.0001f;
                     float force = ((G * Mass * otherBody.Mass) / (distance * distance)) / Mass;
                     Velocity = Velocity.Add(new MyVector(0, 0, 0).Subtract(v).Normalise().Multiply(force));
+
+                    if (Collides(otherBody, distance))
+                    {
+                        Debug.Log("collided");
+                    }
                 }
             }
             Position = Position.Add(Velocity.Multiply(Time.deltaTime));
             PositionNode.Transform = MyMatrix.CreateTranslation(Position);
         }
+
+        protected abstract bool Collides(GravityBody otherBody, float distance);
     }
 }

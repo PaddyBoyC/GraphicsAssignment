@@ -54,5 +54,17 @@ namespace Assets.Scripts
             base.Update(bodies);
             RotationNode.Transform = RotationNode.Transform.Multiply(MyMatrix.CreateRotationY(Time.deltaTime * 1f));
         }
+
+        protected override bool Collides(GravityBody otherBody, float distance)
+        {
+            Planet otherPlanet = otherBody as Planet;
+            if (otherPlanet != null)
+            {
+                float myRadius = Scale.X;
+                float otherRadius = otherPlanet.Scale.X;
+                return (myRadius + otherRadius) > distance;
+            }
+            return false;
+        }
     }
 }

@@ -65,5 +65,10 @@ namespace Assets.Scripts
             base.Update(bodies);
             RotationNode.Transform = RotationNode.Transform.Multiply(MyMatrix.CreateRotationY(Time.deltaTime * 2f));
         }
+
+        protected override bool Collides(GravityBody otherBody, float distance)
+        {
+            return false;
+        }
     }
 }
