@@ -24,13 +24,16 @@ namespace Assets.Scripts
                 {
                     MyVector v = Position.Subtract(otherBody.Position);
                     float distance = v.Magnitude();
-                    const float G = 0.0001f;
+                    const float G = 0.0000001f;
                     float force = ((G * Mass * otherBody.Mass) / (distance * distance)) / Mass;
                     Velocity = Velocity.Add(new MyVector(0, 0, 0).Subtract(v).Normalise().Multiply(force));
+
+
 
                     if (Collides(otherBody, distance))
                     {
                         Debug.Log("collided");
+                        CollisionResponse(otherBody, distance, v);
                     }
                 }
             }
@@ -39,5 +42,6 @@ namespace Assets.Scripts
         }
 
         protected abstract bool Collides(GravityBody otherBody, float distance);
+        protected abstract void CollisionResponse(GravityBody otherBody, float distance, MyVector v);
     }
 }

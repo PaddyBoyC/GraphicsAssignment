@@ -46,6 +46,11 @@ public class MyVector
         return (float)Math.Sqrt(X * X + Y * Y + Z * Z);
     }
 
+    public float MagnitudeSq()
+    {
+        return X * X + Y * Y + Z * Z;
+    }
+
     public MyVector Normalise()
     {
         return Divide(Magnitude());

@@ -70,5 +70,9 @@ namespace Assets.Scripts
         {
             return false;
         }
+
+        protected override void CollisionResponse(GravityBody otherBody, float distance, MyVector v)
+        {
+        }
     }
 }

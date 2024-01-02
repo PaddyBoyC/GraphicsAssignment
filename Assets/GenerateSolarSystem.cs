@@ -1,3 +1,4 @@
+using Assets.Scripts;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class GenerateSolarSystem : MonoBehaviour
     SolarSystemSceneGraph solarSystemSceneGraph;
 
     public Material earthMaterial;
+    public Material mercuryMaterial;
     public bool useSceneGraph;
 
     void Start()
