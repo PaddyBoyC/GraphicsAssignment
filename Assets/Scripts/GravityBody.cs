@@ -24,7 +24,7 @@ namespace Assets.Scripts
                 {
                     MyVector v = Position.Subtract(otherBody.Position);
                     float distance = v.Magnitude();
-                    const float G = 0.0000001f;
+                    const float G = 0.0001f;
                     float force = ((G * Mass * otherBody.Mass) / (distance * distance)) / Mass;
                     Velocity = Velocity.Add(new MyVector(0, 0, 0).Subtract(v).Normalise().Multiply(force));
 

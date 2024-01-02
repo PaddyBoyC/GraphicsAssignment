@@ -86,8 +86,12 @@ namespace Assets.Scripts
                 MyVector velDelta = Velocity.Subtract(otherPlanet.Velocity);
                 MyVector inverseVelDelta = velDelta.Multiply(-1);
 
-                Velocity = Velocity.Subtract(v.Multiply((2 / m2) / (m1 + m2) * velDelta.DotProduct(v) / v.MagnitudeSq()));
-                otherPlanet.Velocity = otherPlanet.Velocity.Subtract(inverseV.Multiply((2 / m1) / (m1 + m2) * inverseVelDelta.DotProduct(inverseV) / inverseV.MagnitudeSq()));
+                MyVector change = v.Multiply((2 * m2) / (m1 + m2) * velDelta.DotProduct(v) / v.MagnitudeSq());
+                Velocity = Velocity.Subtract(change);
+
+
+                MyVector otherChange = inverseV.Multiply((2 * m1) / (m1 + m2) * inverseVelDelta.DotProduct(inverseV) / inverseV.MagnitudeSq());
+                otherPlanet.Velocity = otherPlanet.Velocity.Subtract(otherChange);
             }
         }
     }
