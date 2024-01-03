@@ -32,7 +32,7 @@ public class SolarSystemSceneGraph
 
         MyVector oneVector = new MyVector(1, 1, 1);
 
-        Planet sun = new Planet(new MyVector(0, 0, 0), oneVector.Multiply(5), new MyVector(0, 0, 0), 10000, Color.yellow);;
+        Planet sun = new Planet(new MyVector(0, 0, 0), oneVector.Multiply(5), new MyVector(0, 0, 0), 10000, Color.yellow); ;
         rootScaleNode.AddChild(sun.RootNode);
         bodies.Add(sun);
 
@@ -81,11 +81,42 @@ public class SolarSystemSceneGraph
     
     public void Update()
     {
+        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(0, 0, Camera.main.nearClipPlane));
+        MyVector mouseWorldPos2 = new MyVector(mouseWorldPos.x, mouseWorldPos.y, mouseWorldPos.z);
+        MyVector cameraPos = new MyVector(Camera.main.transform.position.x, Camera.main.transform.position.y, Camera.main.transform.position.z);
+
         foreach (var body in bodies)
         {
             body.Update(bodies);
+
+            Planet planet = body as Planet;
+
+            if (planet != null && LineSphereIntersection(cameraPos, mouseWorldPos2, body.Position, planet.Scale.X))
+            {
+                Debug.DrawLine(Camera.main.transform.position, new Vector3(body.Position.X, body.Position.Y, body.Position.Z), Color.red);
+            }
         }
         RootNode.Draw(MyMatrix.CreateIdentity());
+
+        
+        //Debug.Log(Physics.Raycast(mouseWorldPos, (mouseWorldPos - Camera.main.transform.position)));
+
+        
+        Debug.DrawRay(mouseWorldPos, (mouseWorldPos - Camera.main.transform.position) * 100);
+    }
+
+    bool LineSphereIntersection(MyVector line1, MyVector line2, MyVector sphereOrigin, float sphereRadius)
+    {
+        //float a = Mathf.Pow(line2.X - line1.X, 2) + Mathf.Pow(line2.Y - line1.Y, 2) + Mathf.Pow(line2.Z - line1.Z, 2);
+        //float b = -2 * ((line2.X - line1.X) * (sphereOrigin.X - line1.X) + (line2.Y - line1.Y) * (sphereOrigin.Y - line1.Y) + (sphereOrigin.Z - line1.Z) * (line2.Z - line1.Z));
+        //float c = Mathf.Pow(sphereOrigin.X - line1.X, 2) + Mathf.Pow(sphereOrigin.Y - line1.Y, 2) + Mathf.Pow(sphereOrigin.Z - line1.Z, 2) - (sphereRadius * sphereRadius);
+        //return b * b - (4 * a * c) > 0;
+
+        MyVector u = line2.Subtract(line1).Normalise();
+        float left = Mathf.Pow(u.DotProduct(line1.Subtract(sphereOrigin)), 2);
+        float right = line1.Subtract(sphereOrigin).MagnitudeSq() - sphereRadius * sphereRadius;
+        float result = left - right;
+        return result > 0;
     }
 }
 

@@ -32,7 +32,6 @@ namespace Assets.Scripts
 
                     if (Collides(otherBody, distance))
                     {
-                        Debug.Log("collided");
                         CollisionResponse(otherBody, distance, v);
                     }
                 }
