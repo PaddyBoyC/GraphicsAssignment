@@ -303,7 +303,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 16.16, z: -19.6}
+  m_LocalPosition: {x: 0, y: 0, z: -19.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -338,8 +338,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e481b8a999deb043915db61216e9d4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  earthMaterial: {fileID: 2100000, guid: af468ffd7d4f34a4e96c278eb868e5ab, type: 2}
-  mercuryMaterial: {fileID: 0}
+  sunMaterial: {fileID: 2100000, guid: b3709e69fe306b24d818a0890ad47ee0, type: 2}
+  mercuryMaterial: {fileID: 2100000, guid: c26b11857b9a8954bb1a142262f29bea, type: 2}
+  venusMaterial: {fileID: 2100000, guid: 9a3e25064def35c43926281ce4415a68, type: 2}
+  earthMaterial: {fileID: 2100000, guid: 27b543920aa780641bd37d53eface2d5, type: 2}
+  moonMaterial: {fileID: 2100000, guid: 27148842a4ea07f4681a4359eb844226, type: 2}
+  marsMaterial: {fileID: 2100000, guid: 6d73a7e3b98f7a847b1f1fe997ed8101, type: 2}
+  jupiterMaterial: {fileID: 2100000, guid: 011c988fcba46d84abf94f87de011d19, type: 2}
+  saturnMaterial: {fileID: 2100000, guid: a312c6955cbc5d340b6a3c90d72a17d5, type: 2}
+  uranusMaterial: {fileID: 2100000, guid: 4c3b6e5d091261b41ab5e4ed1672ae48, type: 2}
+  neptuneMaterial: {fileID: 2100000, guid: 055deffc1d60bba49945ea2f43384795, type: 2}
   useSceneGraph: 1
 --- !u!4 &1102248523
 Transform:

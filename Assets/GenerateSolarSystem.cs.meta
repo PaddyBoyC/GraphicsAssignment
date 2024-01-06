@@ -3,7 +3,17 @@ guid: 5e481b8a999deb043915db61216e9d4c
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - sunMaterial: {instanceID: 0}
+  - mercuryMaterial: {instanceID: 0}
+  - venusMaterial: {instanceID: 0}
+  - earthMaterial: {fileID: 2100000, guid: 27b543920aa780641bd37d53eface2d5, type: 2}
+  - moonMaterial: {instanceID: 0}
+  - marsMaterial: {instanceID: 0}
+  - jupiterMaterial: {instanceID: 0}
+  - saturnMaterial: {instanceID: 0}
+  - uranusMaterial: {instanceID: 0}
+  - neptuneMaterial: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

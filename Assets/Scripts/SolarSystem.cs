@@ -21,6 +21,7 @@ public class SolarSystem
         sun.GetComponent<Renderer>().material.color = Color.yellow;
 
 
+        // Old way of calling a the object to the scene, not really of any use of anymore
 
         //MyVector localTranslation = new MyVector(0, 0, 0);
         //MyMatrix bottomTransformMatrix = MyMatrix.CreateTranslation(localTranslation);
@@ -33,7 +34,8 @@ public class SolarSystem
 
     }
     
-    //Builds all the wheels
+    //Builds the planets
+
     private MyMatrix BuildPlanet(MyMatrix pParentTransform, MyVector pOffset, Color color, float scale, Material material = null)
     { 
         MyMatrix localTransform = MyMatrix.CreateTranslation(pOffset);
